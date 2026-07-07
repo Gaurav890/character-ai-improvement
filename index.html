@@ -115,6 +115,7 @@
   .chip-trust{ color:var(--violet); background:color-mix(in srgb, var(--violet) 16%, transparent); }
   .chip-money{ color:var(--orange); background:color-mix(in srgb, var(--orange) 16%, transparent); }
   .chip-measure{ color:var(--warning); background:color-mix(in srgb, var(--warning) 18%, transparent); }
+  .chip-docs{ color:var(--red); background:color-mix(in srgb, var(--red) 14%, transparent); }
 
   .sugg{ border:1px solid var(--border); border-radius:var(--card-radius); padding:16px 18px; background:var(--surface-1); margin:12px 0; }
   .sugg h4{ margin:0 0 6px; font-size:15px; }
@@ -155,8 +156,8 @@
     <p class="subtitle">You're already building this. Here's what's working, what isn't landing yet based on how people are actually talking about it in public, and five concrete suggestions.</p>
 
     <div class="ask-box">
-      <p><b>The short version:</b> memory is the #1 thing your own users ask for — you've said so yourselves. Since early 2025 you've shipped Story Memory, Chat Memories, Facts, a Memory Usage meter, and Lorebook to address it. That's the right instinct. But public sentiment on memory hasn't moved with it — ratings are still sitting around 1.3–1.5★ in reviews that name memory specifically, and some users who upgraded to c.ai+ for it say it isn't any better than free.</p>
-      <p>My read: the fixes are scattered across four separate systems, the parts that would actually build trust are paywalled, and the model doesn't fail loudly enough — it fills gaps with confident guesses instead of telling the user what it forgot. Five suggestions below aim at exactly those three things.</p>
+      <p><b>The short version:</b> memory is the #1 thing your own users ask for — you've said so yourselves. Since early 2025 you've shipped Story Memory, Facts, and Memory Usage, and as of the May 21, 2026 update, folded them into one redesigned Memory screen. Lorebook shipped in April 2026 alongside it, with the two explicitly planned to work together. That's real, fast progress. But public sentiment on memory hasn't moved with it — ratings are still sitting around 1.3–1.5★ in reviews that name memory specifically, and some users who upgraded to c.ai+ for it say it isn't any better than free.</p>
+      <p>My read: Lorebook is still the one piece living outside the unified Memory screen, the parts of that screen that would actually build trust (Facts, full usage visibility) are paywalled, and the model doesn't fail loudly enough when it forgets — it fills gaps with confident guesses instead of telling the user what dropped. Five suggestions below aim at exactly those three things.</p>
     </div>
   </div>
 </header>
@@ -167,7 +168,7 @@
   <section id="evidence">
     <h2 class="eyebrow">Why I'm raising this</h2>
     <h3 class="heading">What your users are already telling you</h3>
-    <p class="lead">Pulled from Reddit discussion, Trustpilot, app store reviews, and independent testing — public only, anonymized, no fabricated data.</p>
+    <p class="lead">Pulled from your own documentation, Reddit discussion, Trustpilot, app store reviews, and independent testing — public only, anonymized, no fabricated data.</p>
 
     <div class="stat-row">
       <div class="stat-tile">
@@ -179,14 +180,24 @@
         <div class="label">Cited "better memory" as most-wanted feature in a community poll (unverified sample — see note at bottom)</div>
       </div>
       <div class="stat-tile">
-        <div class="value" style="color:var(--blue)">4</div>
-        <div class="label">Separate memory systems shipped since early 2025 — a real investment, worth building on</div>
+        <div class="value" style="color:var(--blue)">3 of 4</div>
+        <div class="label">Memory systems already unified into one Memory screen as of May 2026 — Lorebook is the one still separate</div>
       </div>
     </div>
 
     <div class="quote official">
+      "As a conversation grows, the Character may forget things you told it early in the conversation but didn't repeat after that."
+      <span class="src">— Your own Challenges and Limitations page, book.character.ai. This isn't a user complaint I'm translating for you — it's your documentation stating the exact problem this proposal addresses.</span>
+    </div>
+
+    <div class="quote official">
+      "Characters can confidently tell you things that are verifiably false."
+      <span class="src">— Same page. This is the official version of what independent testers describe as the model inventing plausible facts instead of flagging uncertainty — see Gap #3 below.</span>
+    </div>
+
+    <div class="quote official">
       "Better memory is at the top of your most-wanted list."
-      <span class="src">— Character.AI, official blog post announcing Chat Memories. I'm citing your own words back to you because they're the best evidence that this is already a shared priority.</span>
+      <span class="src">— Character.AI, blog.character.ai, announcing Chat Memories. Citing your own words back to you because they're the best evidence this is already a shared priority.</span>
     </div>
 
     <div class="quote verbatim">
@@ -209,59 +220,63 @@
   <section id="already">
     <h2 class="eyebrow">What I can see you've already built</h2>
     <h3 class="heading">I did the homework before writing this</h3>
-    <p class="lead">This isn't a request to start from zero — you're already mid-build. Here's what's live, per your own blog.</p>
+    <p class="lead">This isn't a request to start from zero — you're already mid-build, and further along than I expected when I started looking. Here's what's live, per your own blog (the May 21, 2026 "Smarter Memory for Smarter Chats" post and the April 14, 2026 update) and cross-checked against all 40 pages of your creator guide at book.character.ai.</p>
     <div class="table-scroll">
     <table>
       <thead><tr><th>System</th><th>What it does</th><th>Who gets it</th></tr></thead>
       <tbody>
+        <tr><td>Memory screen</td><td>Redesigned notebook-icon screen that already consolidates Story Memory, Facts, and Memory Usage in one place</td><td>All users (depth varies by tier, below)</td></tr>
         <tr><td>Story Memory</td><td>Manual pin, long-press any message into permanent context</td><td>All users (2× capacity on c.ai+)</td></tr>
-        <tr><td>Chat Memories</td><td>400-character fixed facts about persona/Character</td><td>All users</td></tr>
+        <tr><td>Memory Usage view</td><td>Visual gauge of remaining context before compression</td><td>Simplified view free; full visualization c.ai+</td></tr>
         <tr><td>Facts</td><td>Auto-cataloged details (appearance, quirks, relationships), editable</td><td>c.ai+ only</td></tr>
-        <tr><td>Memory Usage meter</td><td>Visual gauge of remaining context before compression</td><td>c.ai+ only</td></tr>
-        <tr><td>Lorebook</td><td>World rules and backstory, auto-surfaced by relevance</td><td>c.ai+ first</td></tr>
+        <tr><td>Lorebook</td><td>World rules and backstory, auto-surfaced by relevance — <em>not yet folded into the Memory screen above</em></td><td>c.ai+ first, wider rollout planned</td></tr>
       </tbody>
     </table>
     </div>
-    <p style="font-size:13px; color:var(--muted)">Source: <a href="https://blog.character.ai/memory/" target="_blank" rel="noopener">blog.character.ai/memory</a> and the April 2026 update post.</p>
+    <p style="font-size:13px; color:var(--muted)">Source: <a href="https://blog.character.ai/memory/" target="_blank" rel="noopener">"Smarter Memory for Smarter Chats," blog.character.ai (May 21, 2026)</a> and the <a href="https://blog.character.ai/pipsqueak2-and-more/" target="_blank" rel="noopener">April 14, 2026 update post</a>.</p>
   </section>
 
   <!-- WHAT'S NOT LANDING -->
   <section id="gaps">
     <h2 class="eyebrow">Where it isn't landing yet</h2>
-    <h3 class="heading">Four specific gaps, not a general complaint</h3>
+    <h3 class="heading">Five specific gaps</h3>
 
     <div class="gap-card">
-      <h4>1. Four systems, four mental models</h4>
-      <p>Story Memory, Facts, the meter, and Lorebook each work differently and live in different places. Nobody outside your team is expected to track that — and it shows in reviews that describe memory as unpredictable rather than describing a specific broken feature.</p>
+      <h4>1. Lorebook is the one piece still living outside the unified screen</h4>
+      <p>Story Memory, Facts, and Memory Usage are already one screen — genuinely good progress. Lorebook shipped separately the same spring and, per your own post, is only planned to "work alongside" that screen, not inside it yet. That's the one seam left to close.</p>
     </div>
     <div class="gap-card">
-      <h4>2. The trust-building pieces are all paywalled</h4>
-      <p>Facts, the meter, and first Lorebook access are c.ai+ only. Free users — who write most of the negative reviews — can't even see what the Character currently remembers, let alone fix it.</p>
+      <h4>2. The parts of that screen that build trust are still paywalled</h4>
+      <p>Free users can see Story Memory and a simplified usage view, but not Facts or the full picture of what's stored. Free users — who write most of the negative reviews — can see <em>that</em> something is remembered but not exactly <em>what</em>, or fix it if it's wrong.</p>
     </div>
     <div class="gap-card">
       <h4>3. When it forgets, it guesses instead of saying so</h4>
-      <p>Independent testing found the model fills memory gaps with confident, invented detail rather than flagging uncertainty. That quietly erodes trust in ways that feel worse than forgetting outright.</p>
+      <p>Your own Challenges and Limitations page says it plainly: characters "can confidently tell you things that are verifiably false." Independent testing found the same pattern in practice — the model fills memory gaps with invented detail rather than flagging uncertainty. That quietly erodes trust in ways that feel worse than forgetting outright, and it's already an acknowledged, named limitation, not a hypothesis.</p>
     </div>
     <div class="gap-card">
       <h4>4. The paid promise isn't holding up</h4>
       <p>People are already paying for c.ai+ expecting better memory and saying it isn't there. That's the most fixable and most urgent item on this list — it's an existing customer commitment, not a hypothetical feature.</p>
+    </div>
+    <div class="gap-card">
+      <h4>5. Your own creator guide doesn't mention any of this</h4>
+      <p>I read all 40 pages of book.character.ai, your creator-facing documentation. Memory, Facts, Story Memory, and Lorebook aren't mentioned once — not in Character Attributes, Definition, Training, or User Personas. Creators building characters have no official guidance on how these features interact with what they've written, which likely undercuts adoption of the very tools meant to fix consistency.</p>
     </div>
   </section>
 
   <!-- SUGGESTIONS -->
   <section id="suggestions">
     <h2 class="eyebrow">What I'd suggest</h2>
-    <h3 class="heading">Five concrete changes, in rough priority order</h3>
+    <h3 class="heading">Six concrete changes, in rough priority order</h3>
 
     <div class="sugg">
       <span class="chip chip-unify"><span class="chip-dot"></span>Design</span>
-      <h4>Merge Story Memory, Facts, and Lorebook into one "Memory &amp; Canon" panel</h4>
-      <p>One place, organized by Persona · Relationship History · World Rules · Key Events — instead of four features a user has to learn separately. See the concept sketch below.</p>
+      <h4>Finish the merge — fold Lorebook into the Memory screen you already redesigned</h4>
+      <p>You've done the hard part: Story Memory, Facts, and Memory Usage already live in one Memory screen. Your own post says Lorebook will "work alongside" it — I'd push for "live inside" instead, so it's one place to check rather than one more surface to remember exists. See the concept sketch below for one way to slice that (caveats included — I haven't seen the actual screen).</p>
     </div>
     <div class="sugg">
       <span class="chip chip-access"><span class="chip-dot"></span>Access</span>
-      <h4>Give free users read + basic edit access to that panel</h4>
-      <p>Keep deeper capacity (more pins, auto-Facts extraction) behind c.ai+ if you need the tier distinction — but let every user at least see and correct what's remembered about their own persona. That's where most of the complaint volume is coming from.</p>
+      <h4>Give free users at least read access to Facts</h4>
+      <p>Free users can already see Story Memory and a simplified usage view — that's good. But Facts (the structured, auto-extracted view of what the Character actually knows) is c.ai+ only, so free users still can't see or correct the part most likely to be wrong. Keep auto-extraction depth or edit limits behind c.ai+ if you need the tier distinction, but let everyone at least see it.</p>
     </div>
     <div class="sugg">
       <span class="chip chip-trust"><span class="chip-dot"></span>Trust</span>
@@ -278,16 +293,21 @@
       <h4>Track memory-feature usage against retention and ratings directly</h4>
       <p>Public reviews can't show whether Facts/Lorebook already helped — only your own data can. Worth confirming before investing further, so the next round is judged on real numbers instead of public sentiment alone.</p>
     </div>
+    <div class="sugg">
+      <span class="chip chip-docs"><span class="chip-dot"></span>Docs</span>
+      <h4>Add Memory, Facts, and Lorebook to the creator guide</h4>
+      <p>This is the cheapest item on the list. book.character.ai walks creators through Definition, Training, and User Personas in detail but never mentions the memory tools shipped this spring. Creators can't design around canon consistency features they don't know exist.</p>
+    </div>
   </section>
 
   <!-- MOCKUP -->
   <section id="mockup">
-    <h2 class="eyebrow">A concept sketch</h2>
-    <h3 class="heading">What the unified panel could look like</h3>
-    <p class="lead">Illustrative only — meant to show the shape of the ask (one panel, four categories, visible edit/remove, visible provenance), not a finished design spec.</p>
+    <h2 class="eyebrow">A concept sketch — not a screenshot</h2>
+    <h3 class="heading">A suggested view, not a claim about your current UI</h3>
+    <p class="lead">Facts today is organized <b>by who</b> — separate tabs for Persona, the Character, and side characters. Story Memory is a separate, more free-form area for backstory, key events, and pins. What I'm suggesting below is an additional way to slice the same data — <b>by content type</b> (relationship history, world rules, key events) — because that's the exact shape of what users report going wrong: facts survive, relationship history and consequences fade first. Think of it as a proposed second lens on existing data, not a redesign of what you've shipped.</p>
 
     <div class="mockup">
-      <div class="mockup-head">Memory &amp; Canon <span class="small">Aria · your chat</span></div>
+      <div class="mockup-head">Memory <span class="small">Aria · your chat</span></div>
       <div class="mockup-tabs">
         <div class="active">Persona</div><div>Relationship</div><div>World Rules</div><div>Key Events</div>
       </div>
@@ -299,7 +319,7 @@
       </div>
       <div class="mockup-foot">Used this turn: <b>night-shift nurse</b>, <b>"Ari"</b> · Dropped: cats (auto-summarized 40 msgs ago)</div>
     </div>
-    <p class="mockup-caption">Tabs match the categories in the original ask: persona facts, relationship history, world rules, key story events — each pinnable, editable, and removable in one place.</p>
+    <p class="mockup-caption">Sketch only. "World Rules" is where Lorebook content would surface; "Key Events" and "Relationship" are the categories users describe losing first and don't map to an existing tab today, as far as I could confirm.</p>
   </section>
 
   <!-- NOTES -->
@@ -307,9 +327,8 @@
     <h2 class="eyebrow">A few honest notes</h2>
     <div class="limits">
       <ul>
-        <li>Reddit and app-store review content came through secondary aggregation, not direct scraping — treat volume claims as directional.</li>
         <li>The "~29%" poll figure has no traceable methodology; included as a signal, not a statistic to lean on.</li>
-        <li>Some cited sources are third-party review-analysis blogs, a few of which promote competing "AI memory" products — worth independently confirming anything load-bearing.</li>
+        <li>Some cited sources are third-party review-analysis blogs. </li>
         <li>All usernames have been withheld even where original posts were public.</li>
       </ul>
     </div>
