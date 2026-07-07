@@ -4,16 +4,6 @@ A single-page report (`index.html`) proposing a user-controlled memory/canon lay
 
 Public sources only. No fabricated data. Quotes anonymized.
 
-## Deploy
-
-Static HTML, no build step.
-
-```
-vercel deploy
-```
-
-or drag the folder into the Vercel dashboard. `index.html` is the entry point.
-
 ## Structure
 
 - Evidence (stats + quotes)
