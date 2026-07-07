@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Feedback for Character.AI — Memory &amp; Canon Layer</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  :root{
+    --surface-1:      #fcfcfb;
+    --page:           #f9f9f7;
+    --text-primary:   #0b0b0b;
+    --text-secondary: #52514e;
+    --muted:          #898781;
+    --gridline:       #e1e0d9;
+    --border:         rgba(11,11,11,0.10);
+    --blue:           #2a78d6;
+    --aqua:           #1baf7a;
+    --yellow:         #eda100;
+    --violet:         #4a3aa7;
+    --red:            #e34948;
+    --orange:         #eb6834;
+    --good:           #0ca30c;
+    --warning:        #b8860b;
+    --card-radius:    10px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --surface-1:      #1a1a19;
+      --page:           #0d0d0d;
+      --text-primary:   #ffffff;
+      --text-secondary: #c3c2b7;
+      --muted:          #898781;
+      --gridline:       #2c2c2a;
+      --border:         rgba(255,255,255,0.12);
+      --blue:           #3987e5;
+      --aqua:           #199e70;
+      --yellow:         #c98500;
+      --violet:         #9085e9;
+      --red:            #e66767;
+      --orange:         #d95926;
+      --warning:        #fab219;
+    }
+  }
+  :root[data-theme="dark"]{
+    --surface-1:#1a1a19; --page:#0d0d0d; --text-primary:#ffffff; --text-secondary:#c3c2b7;
+    --muted:#898781; --gridline:#2c2c2a; --border:rgba(255,255,255,0.12);
+    --blue:#3987e5; --aqua:#199e70; --yellow:#c98500; --violet:#9085e9; --red:#e66767; --orange:#d95926; --warning:#fab219;
+  }
+  :root[data-theme="light"]{
+    --surface-1:#fcfcfb; --page:#f9f9f7; --text-primary:#0b0b0b; --text-secondary:#52514e;
+    --muted:#898781; --gridline:#e1e0d9; --border:rgba(11,11,11,0.10);
+    --blue:#2a78d6; --aqua:#1baf7a; --yellow:#eda100; --violet:#4a3aa7; --red:#e34948; --orange:#eb6834; --warning:#b8860b;
+  }
+
+  *{ box-sizing:border-box; }
+  body{
+    margin:0; background:var(--page); color:var(--text-primary);
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif; line-height:1.55;
+  }
+  .wrap{ max-width:760px; margin:0 auto; padding:0 20px 90px; }
+
+  header.masthead{ padding:52px 20px 34px; border-bottom:1px solid var(--gridline); background:var(--surface-1); }
+  .masthead-inner{ max-width:760px; margin:0 auto; }
+  .kicker{ text-transform:uppercase; letter-spacing:.08em; font-size:12px; font-weight:700; color:var(--blue); margin:0 0 12px; }
+  h1.title{ font-size:28px; line-height:1.28; margin:0 0 14px; letter-spacing:-0.01em; }
+  .subtitle{ color:var(--text-secondary); font-size:16px; max-width:620px; margin:0 0 22px; }
+
+  .ask-box{
+    border:1px solid var(--border); border-radius:var(--card-radius); padding:20px 22px;
+    background: color-mix(in srgb, var(--blue) 6%, var(--surface-1));
+  }
+  .ask-box p{ margin:0 0 10px; font-size:15px; }
+  .ask-box p:last-child{ margin-bottom:0; }
+  .ask-box b{ font-weight:700; }
+
+  section{ padding:38px 0; border-bottom:1px solid var(--gridline); }
+  section:last-of-type{ border-bottom:none; }
+  h2.eyebrow{ font-size:11.5px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); margin:0 0 6px; }
+  h3.heading{ font-size:21px; margin:0 0 8px; letter-spacing:-0.01em; }
+  p.lead{ font-size:15px; color:var(--text-secondary); margin:0 0 18px; }
+  p{ margin:0 0 14px; }
+  a{ color:var(--blue); }
+  strong{ font-weight:650; }
+
+  .stat-row{ display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin:18px 0 4px; }
+  @media (max-width:600px){ .stat-row{ grid-template-columns:1fr 1fr; } }
+  .stat-tile{ border:1px solid var(--border); border-radius:var(--card-radius); padding:14px 14px 12px; background:var(--surface-1); }
+  .stat-tile .value{ font-size:24px; font-weight:700; letter-spacing:-0.02em; }
+  .stat-tile .label{ font-size:12px; color:var(--text-secondary); margin-top:3px; }
+
+  .quote{ border-left:3px solid var(--blue); padding:2px 0 2px 14px; margin:14px 0; font-size:14.5px; }
+  .quote.verbatim{ border-left-color:var(--aqua); }
+  .quote.paraphrase{ border-left-color:var(--yellow); }
+  .quote .src{ display:block; margin-top:5px; font-size:12px; color:var(--muted); }
+
+  table{ width:100%; border-collapse:collapse; margin:14px 0; font-size:13.5px; }
+  thead th{ text-align:left; font-size:11px; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); font-weight:700; padding:7px 10px; border-bottom:2px solid var(--gridline); }
+  tbody td{ padding:9px 10px; border-bottom:1px solid var(--gridline); vertical-align:top; color:var(--text-secondary); }
+  tbody td:first-child{ color:var(--text-primary); font-weight:600; }
+  tbody tr:last-child td{ border-bottom:none; }
+  .table-scroll{ overflow-x:auto; }
+  .table-scroll table{ min-width:520px; }
+
+  .gap-card{ border:1px solid var(--border); border-radius:var(--card-radius); padding:16px 18px; background:var(--surface-1); margin:12px 0; }
+  .gap-card h4{ margin:0 0 6px; font-size:14.5px; }
+  .gap-card p{ margin:0; font-size:14px; color:var(--text-secondary); }
+
+  .chip{
+    display:inline-flex; align-items:center; gap:5px; font-size:10.5px; font-weight:700;
+    letter-spacing:.03em; text-transform:uppercase; padding:3px 8px; border-radius:20px; margin-bottom:8px;
+  }
+  .chip-dot{ width:6px; height:6px; border-radius:50%; background:currentColor; display:inline-block; }
+  .chip-unify{ color:var(--blue); background:color-mix(in srgb, var(--blue) 14%, transparent); }
+  .chip-access{ color:var(--aqua); background:color-mix(in srgb, var(--aqua) 16%, transparent); }
+  .chip-trust{ color:var(--violet); background:color-mix(in srgb, var(--violet) 16%, transparent); }
+  .chip-money{ color:var(--orange); background:color-mix(in srgb, var(--orange) 16%, transparent); }
+  .chip-measure{ color:var(--warning); background:color-mix(in srgb, var(--warning) 18%, transparent); }
+
+  .sugg{ border:1px solid var(--border); border-radius:var(--card-radius); padding:16px 18px; background:var(--surface-1); margin:12px 0; }
+  .sugg h4{ margin:0 0 6px; font-size:15px; }
+  .sugg p{ margin:0; font-size:14px; color:var(--text-secondary); }
+
+  /* Mockup */
+  .mockup{
+    border:1px solid var(--border); border-radius:14px; background:var(--surface-1);
+    padding:0; overflow:hidden; max-width:420px; margin:18px auto 8px; box-shadow:0 1px 3px var(--border);
+  }
+  .mockup-head{ padding:14px 16px; border-bottom:1px solid var(--gridline); font-weight:700; font-size:14px; display:flex; justify-content:space-between; align-items:center; }
+  .mockup-head span.small{ font-weight:500; font-size:11.5px; color:var(--muted); }
+  .mockup-tabs{ display:flex; border-bottom:1px solid var(--gridline); }
+  .mockup-tabs div{ flex:1; text-align:center; padding:9px 4px; font-size:11px; color:var(--muted); border-right:1px solid var(--gridline); }
+  .mockup-tabs div:last-child{ border-right:none; }
+  .mockup-tabs div.active{ color:var(--blue); font-weight:700; border-bottom:2px solid var(--blue); margin-bottom:-1px; }
+  .mockup-body{ padding:12px 16px; }
+  .mockup-item{ display:flex; justify-content:space-between; align-items:center; padding:9px 0; border-bottom:1px dashed var(--gridline); font-size:13px; }
+  .mockup-item:last-child{ border-bottom:none; }
+  .mockup-actions{ color:var(--muted); font-size:12px; white-space:nowrap; margin-left:10px; }
+  .mockup-foot{ padding:11px 16px; background:color-mix(in srgb, var(--aqua) 8%, var(--surface-1)); border-top:1px solid var(--gridline); font-size:11.5px; color:var(--text-secondary); }
+  .mockup-foot b{ color:var(--aqua); }
+  .mockup-caption{ text-align:center; font-size:12px; color:var(--muted); margin-top:6px; }
+
+  .limits{ background:color-mix(in srgb, var(--warning) 9%, var(--surface-1)); border:1px solid var(--border); border-radius:var(--card-radius); padding:16px 18px; font-size:13px; color:var(--text-secondary); }
+  .limits li{ margin-bottom:6px; }
+  ul{ padding-left:20px; margin:0 0 14px; }
+
+  footer{ padding:34px 0 8px; text-align:center; color:var(--muted); font-size:12px; }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="masthead-inner">
+    <p class="kicker">I'm excited to see this improved in Character.AI</p>
+    <h1 class="title">One feature I'd be excited to add or improve in Character.AI: a memory &amp; canon layer users can see, pin, edit, and trust across chats</h1>
+    <p class="subtitle">You're already building this. Here's what's working, what isn't landing yet based on how people are actually talking about it in public, and five concrete suggestions.</p>
+
+    <div class="ask-box">
+      <p><b>The short version:</b> memory is the #1 thing your own users ask for — you've said so yourselves. Since early 2025 you've shipped Story Memory, Chat Memories, Facts, a Memory Usage meter, and Lorebook to address it. That's the right instinct. But public sentiment on memory hasn't moved with it — ratings are still sitting around 1.3–1.5★ in reviews that name memory specifically, and some users who upgraded to c.ai+ for it say it isn't any better than free.</p>
+      <p>My read: the fixes are scattered across four separate systems, the parts that would actually build trust are paywalled, and the model doesn't fail loudly enough — it fills gaps with confident guesses instead of telling the user what it forgot. Five suggestions below aim at exactly those three things.</p>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <!-- WHAT USERS ARE SAYING -->
+  <section id="evidence">
+    <h2 class="eyebrow">Why I'm raising this</h2>
+    <h3 class="heading">What your users are already telling you</h3>
+    <p class="lead">Pulled from Reddit discussion, Trustpilot, app store reviews, and independent testing — public only, anonymized, no fabricated data.</p>
+
+    <div class="stat-row">
+      <div class="stat-tile">
+        <div class="value" style="color:var(--red)">1.3–1.5★</div>
+        <div class="label">Aggregate rating reported mid‑2026, with memory named as a recurring reason</div>
+      </div>
+      <div class="stat-tile">
+        <div class="value" style="color:var(--warning)">~29%</div>
+        <div class="label">Cited "better memory" as most-wanted feature in a community poll (unverified sample — see note at bottom)</div>
+      </div>
+      <div class="stat-tile">
+        <div class="value" style="color:var(--blue)">4</div>
+        <div class="label">Separate memory systems shipped since early 2025 — a real investment, worth building on</div>
+      </div>
+    </div>
+
+    <div class="quote official">
+      "Better memory is at the top of your most-wanted list."
+      <span class="src">— Character.AI, official blog post announcing Chat Memories. I'm citing your own words back to you because they're the best evidence that this is already a shared priority.</span>
+    </div>
+
+    <div class="quote verbatim">
+      "The AI remembered that two characters were friends. It forgot they'd had a serious argument."
+      <span class="src">— Independent tester, 2026 hands-on memory test. Facts survive; consequences and relationship history fade first — worth designing memory categories around that pattern specifically.</span>
+    </div>
+
+    <div class="quote paraphrase">
+      A reviewer who upgraded specifically for the memory improvements said it was "definitely not any better than the free version"; others called the paywalled memory pitch a "cheap move."
+      <span class="src">— Paraphrased from review-analysis coverage of c.ai+ memory upgrades.</span>
+    </div>
+
+    <div class="quote verbatim">
+      "No bot is themselves anymore and it's just copy and paste."
+      <span class="src">— r/CharacterAI user (username withheld). Distinct from pure memory loss — feels closer to personality consistency, flagged separately below so it doesn't get conflated with the memory fix.</span>
+    </div>
+  </section>
+
+  <!-- ALREADY BUILT -->
+  <section id="already">
+    <h2 class="eyebrow">What I can see you've already built</h2>
+    <h3 class="heading">I did the homework before writing this</h3>
+    <p class="lead">This isn't a request to start from zero — you're already mid-build. Here's what's live, per your own blog.</p>
+    <div class="table-scroll">
+    <table>
+      <thead><tr><th>System</th><th>What it does</th><th>Who gets it</th></tr></thead>
+      <tbody>
+        <tr><td>Story Memory</td><td>Manual pin, long-press any message into permanent context</td><td>All users (2× capacity on c.ai+)</td></tr>
+        <tr><td>Chat Memories</td><td>400-character fixed facts about persona/Character</td><td>All users</td></tr>
+        <tr><td>Facts</td><td>Auto-cataloged details (appearance, quirks, relationships), editable</td><td>c.ai+ only</td></tr>
+        <tr><td>Memory Usage meter</td><td>Visual gauge of remaining context before compression</td><td>c.ai+ only</td></tr>
+        <tr><td>Lorebook</td><td>World rules and backstory, auto-surfaced by relevance</td><td>c.ai+ first</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p style="font-size:13px; color:var(--muted)">Source: <a href="https://blog.character.ai/memory/" target="_blank" rel="noopener">blog.character.ai/memory</a> and the April 2026 update post.</p>
+  </section>
+
+  <!-- WHAT'S NOT LANDING -->
+  <section id="gaps">
+    <h2 class="eyebrow">Where it isn't landing yet</h2>
+    <h3 class="heading">Four specific gaps, not a general complaint</h3>
+
+    <div class="gap-card">
+      <h4>1. Four systems, four mental models</h4>
+      <p>Story Memory, Facts, the meter, and Lorebook each work differently and live in different places. Nobody outside your team is expected to track that — and it shows in reviews that describe memory as unpredictable rather than describing a specific broken feature.</p>
+    </div>
+    <div class="gap-card">
+      <h4>2. The trust-building pieces are all paywalled</h4>
+      <p>Facts, the meter, and first Lorebook access are c.ai+ only. Free users — who write most of the negative reviews — can't even see what the Character currently remembers, let alone fix it.</p>
+    </div>
+    <div class="gap-card">
+      <h4>3. When it forgets, it guesses instead of saying so</h4>
+      <p>Independent testing found the model fills memory gaps with confident, invented detail rather than flagging uncertainty. That quietly erodes trust in ways that feel worse than forgetting outright.</p>
+    </div>
+    <div class="gap-card">
+      <h4>4. The paid promise isn't holding up</h4>
+      <p>People are already paying for c.ai+ expecting better memory and saying it isn't there. That's the most fixable and most urgent item on this list — it's an existing customer commitment, not a hypothetical feature.</p>
+    </div>
+  </section>
+
+  <!-- SUGGESTIONS -->
+  <section id="suggestions">
+    <h2 class="eyebrow">What I'd suggest</h2>
+    <h3 class="heading">Five concrete changes, in rough priority order</h3>
+
+    <div class="sugg">
+      <span class="chip chip-unify"><span class="chip-dot"></span>Design</span>
+      <h4>Merge Story Memory, Facts, and Lorebook into one "Memory &amp; Canon" panel</h4>
+      <p>One place, organized by Persona · Relationship History · World Rules · Key Events — instead of four features a user has to learn separately. See the concept sketch below.</p>
+    </div>
+    <div class="sugg">
+      <span class="chip chip-access"><span class="chip-dot"></span>Access</span>
+      <h4>Give free users read + basic edit access to that panel</h4>
+      <p>Keep deeper capacity (more pins, auto-Facts extraction) behind c.ai+ if you need the tier distinction — but let every user at least see and correct what's remembered about their own persona. That's where most of the complaint volume is coming from.</p>
+    </div>
+    <div class="sugg">
+      <span class="chip chip-trust"><span class="chip-dot"></span>Trust</span>
+      <h4>Show what the model actually used this turn</h4>
+      <p>A small, dismissible strip — "used: [fact], [fact] · dropped: [fact]" — turns invisible failure into a visible, fixable one. This targets the confident-fabrication problem directly, which storage alone doesn't solve.</p>
+    </div>
+    <div class="sugg">
+      <span class="chip chip-money"><span class="chip-dot"></span>Trust</span>
+      <h4>Close the c.ai+ memory gap before promoting it further</h4>
+      <p>Fix or clearly re-scope what the memory upgrade actually delivers for paying users. This is the cheapest reputational win on the list — it's about honoring an existing promise, not building something new.</p>
+    </div>
+    <div class="sugg">
+      <span class="chip chip-measure"><span class="chip-dot"></span>Measurement</span>
+      <h4>Track memory-feature usage against retention and ratings directly</h4>
+      <p>Public reviews can't show whether Facts/Lorebook already helped — only your own data can. Worth confirming before investing further, so the next round is judged on real numbers instead of public sentiment alone.</p>
+    </div>
+  </section>
+
+  <!-- MOCKUP -->
+  <section id="mockup">
+    <h2 class="eyebrow">A concept sketch</h2>
+    <h3 class="heading">What the unified panel could look like</h3>
+    <p class="lead">Illustrative only — meant to show the shape of the ask (one panel, four categories, visible edit/remove, visible provenance), not a finished design spec.</p>
+
+    <div class="mockup">
+      <div class="mockup-head">Memory &amp; Canon <span class="small">Aria · your chat</span></div>
+      <div class="mockup-tabs">
+        <div class="active">Persona</div><div>Relationship</div><div>World Rules</div><div>Key Events</div>
+      </div>
+      <div class="mockup-body">
+        <div class="mockup-item">Works as a night-shift nurse <span class="mockup-actions">✎ &nbsp; ✕</span></div>
+        <div class="mockup-item">Prefers to be called "Ari" <span class="mockup-actions">✎ &nbsp; ✕</span></div>
+        <div class="mockup-item">Allergic to cats <span class="mockup-actions">✎ &nbsp; ✕</span></div>
+        <div class="mockup-item" style="color:var(--muted)">+ Add a fact manually</div>
+      </div>
+      <div class="mockup-foot">Used this turn: <b>night-shift nurse</b>, <b>"Ari"</b> · Dropped: cats (auto-summarized 40 msgs ago)</div>
+    </div>
+    <p class="mockup-caption">Tabs match the categories in the original ask: persona facts, relationship history, world rules, key story events — each pinnable, editable, and removable in one place.</p>
+  </section>
+
+  <!-- NOTES -->
+  <section id="notes">
+    <h2 class="eyebrow">A few honest notes</h2>
+    <div class="limits">
+      <ul>
+        <li>Reddit and app-store review content came through secondary aggregation, not direct scraping — treat volume claims as directional.</li>
+        <li>The "~29%" poll figure has no traceable methodology; included as a signal, not a statistic to lean on.</li>
+        <li>Some cited sources are third-party review-analysis blogs, a few of which promote competing "AI memory" products — worth independently confirming anything load-bearing.</li>
+        <li>All usernames have been withheld even where original posts were public.</li>
+      </ul>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  Prepared from public sources only, July 2026 · Sources: blog.character.ai, Trustpilot, and independent testing/reporting cited inline above
+</footer>
+
+</body>
+</html>
